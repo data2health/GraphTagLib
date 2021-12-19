@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import edu.uiowa.slis.graphtaglib.Graph;
 import edu.uiowa.slis.graphtaglib.GraphEdge;
@@ -19,7 +20,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 
 public class ImplicitEdgeLookup extends EdgePopulator {
-    static Logger logger = Logger.getLogger(ImplicitEdgeLookup.class);
+	static Logger logger = LogManager.getLogger(ImplicitEdgeLookup.class);
     Connection conn = null;
     Vector<GraphNode> nodes = null;
     DataSource theDataSource = null;

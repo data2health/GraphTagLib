@@ -2,11 +2,11 @@ package edu.uiowa.slis.graphtaglib;
 
 import java.util.HashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GraphNode {
-    private static final Log log = LogFactory.getLog(GraphNode.class);
+	static Logger logger = LogManager.getLogger(GraphNode.class);
 
     int ID = 0;
     String uri = null;
@@ -61,7 +61,7 @@ public class GraphNode {
     }
     
     public int getGroup(String group) {
-	log.trace("getGroup: " + group + " " + groups);
+    	logger.trace("getGroup: " + group + " " + groups);
 	try {
 	    return groups.get(group);
 	} catch (Exception e) {

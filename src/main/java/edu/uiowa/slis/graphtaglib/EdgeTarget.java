@@ -6,16 +6,16 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeTarget extends TagSupport {
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(EdgeTarget.class);
+	static Logger logger = LogManager.getLogger(EdgeTarget.class);
 
     public int doStartTag() throws JspException {
 	Edge theEdge = (Edge) findAncestorWithClass(this, Edge.class);
-	log.trace("");
+	logger.trace("");
 	try {
 	    pageContext.getOut().print(theEdge.currentEdge.getTarget().getID());
 	} catch (IOException e) {

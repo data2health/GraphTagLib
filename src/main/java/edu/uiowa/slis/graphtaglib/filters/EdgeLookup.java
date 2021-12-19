@@ -6,14 +6,14 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import edu.uiowa.slis.graphtaglib.Graph;
 
 public class EdgeLookup extends TagSupport {
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(EdgeLookup.class);
+	static Logger logger = LogManager.getLogger(EdgeLookup.class);
 
     String edgeLocator = null;
     String dataSource = null;
@@ -24,7 +24,7 @@ public class EdgeLookup extends TagSupport {
 
     @SuppressWarnings("unchecked")
     public int doStartTag() throws JspException {
-	log.debug("in doStartTag");
+    	logger.debug("in doStartTag");
 	try {
 	    this.cls = Class.forName(this.edgeLocator);
 	    Constructor<?> con = this.cls.getConstructor(String.class);
@@ -40,7 +40,7 @@ public class EdgeLookup extends TagSupport {
     }
 
     public int doEndTag() throws JspTagException, JspException {
-	log.debug("in doEndTag");
+    	logger.debug("in doEndTag");
 	clearServiceState();
 	return super.doEndTag();
     }

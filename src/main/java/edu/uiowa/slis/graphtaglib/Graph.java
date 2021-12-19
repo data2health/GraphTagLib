@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -13,7 +13,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class Graph extends BodyTagSupport {
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(Graph.class);
+	static Logger logger = LogManager.getLogger(Graph.class);
     Hashtable<String, GraphNode> nodeHash = null;
     Hashtable<String, Integer> edgeHash = null;
     public Vector<GraphNode> nodes = null;
@@ -35,7 +35,7 @@ public class Graph extends BodyTagSupport {
 	nodes = new Vector<GraphNode>();
 	edges = new Vector<GraphEdge>();
 
-	log.info("in doStartTag");
+	logger.info("in doStartTag");
 	if (edgeHash == null) {
 	    edgeHash = new Hashtable<String, Integer>();
 	    nodeHash = new Hashtable<String, GraphNode>();
@@ -45,7 +45,7 @@ public class Graph extends BodyTagSupport {
     }
 
     public int doEndTag() throws JspTagException, JspException {
-	log.info("in doEndTag");
+    	logger.info("in doEndTag");
 	clearServiceState();
 	return super.doEndTag();
     }
@@ -62,7 +62,7 @@ public class Graph extends BodyTagSupport {
 	GraphNode clone = nodeHash.get(node.getUri());
 	
 	if (clone != null) {
-	    log.error("node already in graph with URI " + node.getUri());
+		logger.error("node already in graph with URI " + node.getUri());
 	    clone.setScore(Math.max(clone.getScore(), node.getScore()));
 	    maxScore = Math.max(clone.getScore(), maxScore);
 	    return;
@@ -75,12 +75,12 @@ public class Graph extends BodyTagSupport {
     
     public void removeNode(GraphNode node) {
 	if (!nodeHash.containsKey(node.getUri())) {
-	    log.error("node not in graph with URI " + node.getUri());
+		logger.error("node not in graph with URI " + node.getUri());
 	    return;
 	}
 	
 	// removing the node and its edges from the vectors and the hash
-	log.trace("edge hash size: " + edgeHash.size() + " vector size: " + edges.size());
+	logger.trace("edge hash size: " + edgeHash.size() + " vector size: " + edges.size());
 	nodes.remove(node);
 	nodeHash.remove(node.getUri());
 	
@@ -88,7 +88,7 @@ public class Graph extends BodyTagSupport {
 	for (int x = edges.size() - 1; x >= 0; x--) {
 	    GraphEdge edge = edges.elementAt(x);
 	    if (edge.getSource() == node | edge.getTarget() == node) {
-		log.trace("remove edge " + edge.getSource().getLabel() + " " + edge.getTarget().getUri());
+	    	logger.trace("remove edge " + edge.getSource().getLabel() + " " + edge.getTarget().getUri());
 		edges.remove(edge);
 		edgeHash.remove(edge.getSource().getUri() + " " + edge.getTarget().getUri());
 		edgeHash.remove(edge.getTarget().getUri() + " " + edge.getSource().getUri());
@@ -123,7 +123,7 @@ public class Graph extends BodyTagSupport {
 
     void pruneOrphans() {
 	Vector<GraphNode> newNodes = new Vector<GraphNode>();
-	log.info("int pruneOrphans - " + nodes.size() + " nodes");
+	logger.info("int pruneOrphans - " + nodes.size() + " nodes");
 
 	for (int i = 0; i < nodes.size(); i++) {
 	    String sourceURI = nodes.elementAt(i).getUri();
@@ -147,16 +147,16 @@ public class Graph extends BodyTagSupport {
     void resetNodeIDs() {
 	maxScore = 0;
 	for (int i = 0; i < nodes.size(); i++) {
-	    log.trace(nodes.elementAt(i).getUri() + " " + i);
+		logger.trace(nodes.elementAt(i).getUri() + " " + i);
 	    nodes.elementAt(i).setID(i);
 	    maxScore = Math.max(nodes.elementAt(i).getScore(), maxScore);
 	}
     }
     
     public void dump() {
-	log.info("current graph nodes:");
+    	logger.info("current graph nodes:");
 	for (GraphNode node : nodes) {
-	    log.info("\tsite: " + node.getGroup("site") + " uri: " + node.getUri());
+		logger.info("\tsite: " + node.getGroup("site") + " uri: " + node.getUri());
 	}
     }
 }

@@ -2,8 +2,8 @@ package edu.uiowa.slis.graphtaglib;
 
 import java.util.Enumeration;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -11,8 +11,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class EdgeIterator extends BodyTagSupport {
     private static final long serialVersionUID = 1L;
-
-    private static final Log log = LogFactory.getLog(EdgeIterator.class);
+	static Logger logger = LogManager.getLogger(EdgeIterator.class);
 
     Vector<GraphEdge> edges = null;
     Enumeration<GraphEdge> edgeEnum = null;
@@ -29,7 +28,7 @@ public class EdgeIterator extends BodyTagSupport {
 
 	if (edgeEnum.hasMoreElements()) {
 	    currentEdge = edgeEnum.nextElement();
-	    log.trace("edge source: " + currentEdge.source.ID + " " + currentEdge.source.uri + "\ttarget: " + currentEdge.target.ID + " "
+	    logger.trace("edge source: " + currentEdge.source.ID + " " + currentEdge.source.uri + "\ttarget: " + currentEdge.target.ID + " "
 		    + currentEdge.target.uri + "\tweight: " + currentEdge.weight);
 	    pageContext.setAttribute("isLastEdge", !edgeEnum.hasMoreElements());
 	    return EVAL_BODY_INCLUDE;
@@ -41,8 +40,8 @@ public class EdgeIterator extends BodyTagSupport {
     public int doAfterBody() throws JspTagException {
 	if (edgeEnum.hasMoreElements()) {
 	    currentEdge = edgeEnum.nextElement();
-	    log.trace("edge source: " + currentEdge.source.ID + "\ttarget: " + currentEdge.target.ID + "\tweight: " + currentEdge.weight);
-	    log.trace("edge source: " + currentEdge.source.ID + " " + currentEdge.source.uri + "\ttarget: " + currentEdge.target.ID + " "
+	    logger.trace("edge source: " + currentEdge.source.ID + "\ttarget: " + currentEdge.target.ID + "\tweight: " + currentEdge.weight);
+	    logger.trace("edge source: " + currentEdge.source.ID + " " + currentEdge.source.uri + "\ttarget: " + currentEdge.target.ID + " "
 			    + currentEdge.target.uri + "\tweight: " + currentEdge.weight);
 	    pageContext.setAttribute("isLastEdge", !edgeEnum.hasMoreElements());
 	    return EVAL_BODY_AGAIN;

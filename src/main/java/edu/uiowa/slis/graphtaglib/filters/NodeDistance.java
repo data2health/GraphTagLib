@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import edu.uiowa.slis.graphtaglib.Graph;
 import edu.uiowa.slis.graphtaglib.GraphEdge;
@@ -25,9 +26,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 public class NodeDistance extends TagSupport {
     private static final long serialVersionUID = 1L;
+	static Logger logger = LogManager.getLogger(NodeDistance.class);
 
-    static Logger logger = Logger.getLogger(NodeDistance.class);
-    Connection conn = null;
+	Connection conn = null;
     Graph theGraph = null;
     Vector<GraphNode> nodes = null;
     Vector<GraphEdge> edges = null;
@@ -47,8 +48,6 @@ public class NodeDistance extends TagSupport {
 	logger.debug("in filterNodes");
 	nodes = theGraph.nodes;
 	edges = theGraph.edges;
-	String uri = null;
-	Hashtable<String, String> visitedHash = new Hashtable<String, String>();
 	Hashtable<Integer, String> sites_hash =new Hashtable<Integer, String>();
 	String sites = "";
 	

@@ -3,11 +3,11 @@ package edu.uiowa.slis.graphtaglib.CommunityDetection;
 import java.io.IOException;
 import java.util.Random;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public abstract class Detector {
-    static Logger logger = Logger.getLogger(Detector.class);
+	static Logger logger = LogManager.getLogger(Detector.class);
 
     enum ModularityType {
 	standard, alternative
@@ -29,7 +29,6 @@ public abstract class Detector {
     Network maxNetwork;
 
     public static void main(String args[]) throws IOException {
-	PropertyConfigurator.configure(args[0]);
 	// Detector theDetector = new LouvainDetector();
 	// Detector theDetector = new LouvainMultilevelRefinementDetector();
 	Detector theDetector = new SmartLocalMovingDetector();

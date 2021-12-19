@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 public class SiteIDIterator extends BodyTagSupport {
     private static final long serialVersionUID = 1L;
 
-    private static final Log logger = LogFactory.getLog(SiteIDIterator.class);
+	static Logger logger = LogManager.getLogger(SiteIDIterator.class);
     static Hashtable<Integer, String> siteHash = null;
 
     SortedSet<Integer> idSet = null;

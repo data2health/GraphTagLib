@@ -2,8 +2,8 @@ package edu.uiowa.slis.graphtaglib;
 
 import java.util.Enumeration;
 import java.util.Vector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -11,8 +11,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class NodeIterator extends BodyTagSupport {
     private static final long serialVersionUID = 1L;
-
-    private static final Log log = LogFactory.getLog(NodeIterator.class);
+	static Logger logger = LogManager.getLogger(NodeIterator.class);
 
     Vector<GraphNode> nodes = null;
     Enumeration<GraphNode> nodeEnum = null;
@@ -23,7 +22,7 @@ public class NodeIterator extends BodyTagSupport {
     public int doStartTag() throws JspException {
 	Graph theGraph = (Graph) findAncestorWithClass(this, Graph.class);
 
-	log.debug("doStartTag pruneOrphans: " + pruneOrphans);
+	logger.debug("doStartTag pruneOrphans: " + pruneOrphans);
 	if (pruneOrphans)
 	    theGraph.pruneOrphans();
 
@@ -54,7 +53,7 @@ public class NodeIterator extends BodyTagSupport {
     }
 
     public int doEndTag() throws JspTagException, JspException {
-	log.debug("doEndTag");
+    	logger.debug("doEndTag");
 	clearServiceState();
 	return super.doEndTag();
     }

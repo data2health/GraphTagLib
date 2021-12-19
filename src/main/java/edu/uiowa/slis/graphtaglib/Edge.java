@@ -4,12 +4,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Edge extends TagSupport {
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(Edge.class);
+	static Logger logger = LogManager.getLogger(Edge.class);
 
     GraphNode sourceNode = null;
     GraphNode targetNode = null;
@@ -23,7 +23,7 @@ public class Edge extends TagSupport {
 	EdgeIterator theIterator = (EdgeIterator) findAncestorWithClass(this, EdgeIterator.class);
 
 	if (theIterator == null) {
-	    log.trace("Adding edge source: " + source + "\ttarget: " + target + "\tweight: " + weight);
+		logger.trace("Adding edge source: " + source + "\ttarget: " + target + "\tweight: " + weight);
 	    theGraph.addEdge(new GraphEdge(theGraph.getNode(source), theGraph.getNode(target), weight));
 	    return SKIP_BODY;
 	} else {
@@ -35,7 +35,7 @@ public class Edge extends TagSupport {
 	}
 
 	// currentEdge = theIterator.currentEdge;
-	log.trace("");
+	logger.trace("");
 	return EVAL_BODY_INCLUDE;
     }
 

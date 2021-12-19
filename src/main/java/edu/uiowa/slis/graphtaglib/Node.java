@@ -4,13 +4,13 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Node extends TagSupport {
     private static final long serialVersionUID = 1L;
 
-    private static final Log log = LogFactory.getLog(Node.class);
+	static Logger logger = LogManager.getLogger(Node.class);
 
     String uri = null;
     String label = null;
@@ -27,7 +27,7 @@ public class Node extends TagSupport {
 	    NodeIterator theIterator = (NodeIterator) findAncestorWithClass(this, NodeIterator.class);
 
 	    if (theIterator == null) {
-		log.debug("Adding node: " + uri + "\t" + label + "\tgroup: " + group + "\tscore: " + score + "\tauxInt: " + auxInt + "\tauxString: "
+	    	logger.debug("Adding node: " + uri + "\t" + label + "\tgroup: " + group + "\tscore: " + score + "\tauxInt: " + auxInt + "\tauxString: "
 			+ auxString);
 		theGraph.addNode(new GraphNode(uri, label, group, score, auxInt, auxString, auxDouble));
 		return SKIP_BODY;
@@ -42,7 +42,7 @@ public class Node extends TagSupport {
 		return EVAL_BODY_INCLUDE;
 	    }
 	} catch (Exception e) {
-	    log.error("Can't find enclosing Graph or NodeIterator tag ", e);
+		logger.error("Can't find enclosing Graph or NodeIterator tag ", e);
 	    throw new JspTagException("Can't find enclosing Graph or NodeIterator tag ");
 	}
     }
@@ -116,12 +116,12 @@ public class Node extends TagSupport {
     }
 
     public void setAuxDouble(double auxDouble) {
-	log.trace("setting auxDouble: " + auxDouble);
+    	logger.trace("setting auxDouble: " + auxDouble);
 	this.auxDouble = auxDouble;
     }
     
     public void setColoring(String coloring) {
-	log.trace("setting coloring: " + coloring);
+    	logger.trace("setting coloring: " + coloring);
 	if (!coloring.equals("site")) {
 	    this.coloring = "edu.uiowa.slis.graphtaglib.CommunityDetection." + coloring + "Wrapper" + String.valueOf(this.auxDouble);
 	} else {
