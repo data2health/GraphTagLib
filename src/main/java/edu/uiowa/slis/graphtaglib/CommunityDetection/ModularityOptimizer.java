@@ -239,10 +239,8 @@ public class ModularityOptimizer {
 	}
 
 	private static void writeOutputFile(String fileName, int[] cluster) throws IOException {
-		BufferedWriter bufferedWriter;
+		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));
 		int i;
-
-		bufferedWriter = new BufferedWriter(new FileWriter(fileName));
 
 		for (i = 0; i < cluster.length; i++) {
 			bufferedWriter.write(Integer.toString(cluster[i]));
