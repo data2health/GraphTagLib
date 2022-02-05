@@ -24,7 +24,14 @@ public class Edge extends TagSupport {
 
 	if (theIterator == null) {
 		logger.trace("Adding edge source: " + source + "\ttarget: " + target + "\tweight: " + weight);
-	    theGraph.addEdge(new GraphEdge(theGraph.getNode(source), theGraph.getNode(target), weight));
+		GraphNode sourceNode = theGraph.getNode(source);
+		GraphNode targetNode = theGraph.getNode(target);
+		if (sourceNode == null) {
+			logger.error("source node missing for edge <" + source + ", " + target + ">");
+		} else if (targetNode == null) {
+			logger.error("target node missing for edge <" + source + ", " + target + ">");			
+		} else
+			theGraph.addEdge(new GraphEdge(sourceNode, targetNode, weight));
 	    return SKIP_BODY;
 	} else {
 	    currentEdge = theIterator.currentEdge;
