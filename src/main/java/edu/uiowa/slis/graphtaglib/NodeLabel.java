@@ -17,7 +17,12 @@ public class NodeLabel extends TagSupport {
 	Node theNode = (Node) findAncestorWithClass(this, Node.class);
 	logger.trace("");
 	try {
-	    pageContext.getOut().print(theNode.getLabel());
+	    pageContext.getOut().print(theNode.getLabel()
+	    							.replace("\t", "\\t")
+	    							.replace("\b", "\\b")
+	    							.replace("\n", "\\n")
+	    							.replace("\r", "\\r")
+	    							.replace("\f", "\\f"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
