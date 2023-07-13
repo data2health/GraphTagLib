@@ -20,6 +20,9 @@ src/main/java/edu/uiowa/slis/graphtaglib/CommunityDetection/Network.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/CommunityDetection/SmartLocalMovingDetector.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/CommunityDetection/SmartLocalMovingWrapper.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/Edge.java -text
+src/main/java/edu/uiowa/slis/graphtaglib/EdgeAuxDouble.java -text
+src/main/java/edu/uiowa/slis/graphtaglib/EdgeAuxInt.java -text
+src/main/java/edu/uiowa/slis/graphtaglib/EdgeAuxString.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/EdgeIterator.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/EdgeSource.java -text
 src/main/java/edu/uiowa/slis/graphtaglib/EdgeTarget.java -text

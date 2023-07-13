@@ -149,6 +149,24 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+
+		<attribute>
+			<name>auxInt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>auxString</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>auxDouble</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 
 	<tag>
@@ -166,6 +184,24 @@
 	<tag>
 		<name>edgeWeight</name>
 		<tag-class>edu.uiowa.slis.graphtaglib.EdgeWeight</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>edgeAuxInt</name>
+		<tag-class>edu.uiowa.slis.graphtaglib.EdgeAuxInt</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>edgeAuxString</name>
+		<tag-class>edu.uiowa.slis.graphtaglib.EdgeAuxString</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<name>edgeAuxDouble</name>
+		<tag-class>edu.uiowa.slis.graphtaglib.EdgeAuxDouble</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	
